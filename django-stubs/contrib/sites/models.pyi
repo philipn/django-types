@@ -1,6 +1,8 @@
 from typing import Any, Optional, Tuple, Type
 
 from django.db import models
+from django.db.models import Manager
+from django.contrib.redirects.models import Redirect
 from django.http.request import HttpRequest
 
 SITE_CACHE: Any
@@ -12,6 +14,7 @@ class SiteManager(models.Manager["Site"]):
 
 class Site(models.Model):
     objects: SiteManager
+    redirect_set: Manager[Redirect]
 
     domain = models.CharField(max_length=100)
     name = models.CharField(max_length=50)
